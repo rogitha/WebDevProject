@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Home</title>
+    <link rel="stylesheet" href="student-class-view.css">
+</head>
+<body>
+    <header class="header">
+        <h1 id="class-name">Class Name</h1>
+    </header>
+    <div class="container">
+        <div class="assignment-area">
+            <h3 class="header">Assignments</h3>
+            <div class="scrollable" id="assignment-list">
+                <!--This part will have to be dynamically generated-->
+            </div>
+        </div>
+
+        <div id="placeholder-submission">
+            <p>Please select an assignment</p>
+        </div>
+
+        <div id="assignment-submission" class="scrollable" style="display: none;">
+            <h2 id="assignment-name"></h2>
+            <h3 id="due-date"></h3>
+            <div id="drop-area">
+                <p>Drag and drop your video here</p>
+                <input type="file" id="assignment-video" accept="video/*" style="display: none;"/>
+                <label for="assignment-video" id="video-label">or click to add video</label>
+            </div>
+            <video id="video-player" controls style="display: none;"></video>
+            <!--I still want this to take up the needed space-->
+            <div id="submission-control" style="visibility:hidden;">
+                <button class="submission-button" id="submit" onclick="submitVideo()">Submit</button>
+                <button class="submission-button" id="remove" onclick="removeVideo()">Remove</button>
+            </div>
+            <h3 id="grade-status"></h3>
+
+            <!--This will also have to be generated at runtime, I am unsure of the best way to implement this-->
+            <div>
+                <div id="rubric-area">
+                    <h3>Rubric</h3>
+                    <table class="rubric">
+                        <thead>
+                            <tr><th>Criteria</th><th>Rating</th><th>Pts</th></tr>
+                        </thead>
+                        <tr>
+                            <td>Criteria 1</td>
+                            <td>4 pts</td>
+                            <td>3 pts</td>
+                            <td>2 pts</td>
+                            <td>1 pts</td>
+                            <td>0 pts</td>
+                        </tr>
+                        <tr>
+                            <td>Criteria 1</td>
+                            <td>4 pts</td>
+                            <td>3 pts</td>
+                            <td>2 pts</td>
+                            <td>1 pts</td>
+                            <td>0 pts</td>
+                        </tr>
+                        <tr>
+                            <td>Criteria 1</td>
+                            <td>4 pts</td>
+                            <td>3 pts</td>
+                            <td>2 pts</td>
+                            <td>1 pts</td>
+                            <td>0 pts</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <script src="student-class-view.js"></script>
+</body>
+</html>
