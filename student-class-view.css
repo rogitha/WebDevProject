@@ -22,8 +22,17 @@
     height: 60px;
     border-bottom: 2px solid black;
     display: flex;
-    justify-content: center;
     align-items: center;
+    gap: 30px;
+  }
+
+  #home-button{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 4px;
+    cursor: pointer;
   }
 
   .container{
@@ -140,4 +149,30 @@
 
   #remove {
     background-color: #e62429;
+  }
+
+  .rubric {
+    /* This width will most likely have to be changed depending on the number of ratings in the rubric */
+    width: 800px;
+    border-collapse: collapse;
+    margin: 20px 0; 
+  }
+
+  .rubric th, .rubric td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+  }
+
+  .rubric th {
+    text-align: center;
+    background-color: rgba(128, 128, 128, 0.261);
+  }
+
+  rubric tr:nth-child(even){
+    background-color: #f0f2f55f;
+  }
+
+  .rubric td{
+    min-width: 40px;
   }

@@ -1,3 +1,8 @@
+function goStudentHome(){
+    //This is temporary
+    window.location.href = "index.html";
+}
+
 let videoDropArea = document.getElementById("drop-area");
 let videoPlayer = document.getElementById("video-player");
 
