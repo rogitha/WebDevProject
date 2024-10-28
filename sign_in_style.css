@@ -1,0 +1,89 @@
+/* Root Colors */
+:root {
+    --charcoal: #233d4dff;
+    --pumpkin: #fe7f2dff;
+    --sunglow: #fcca46ff;
+    --sandy-brown: #fea971ff;
+    --font-main: Arial, sans-serif;
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-main);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(240, 240, 240);
+}
+
+/* Toggle Buttons for User Type */
+.user-type-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.user-type-buttons button {
+    font-size: medium;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 12px;
+    margin: 0 5px;
+    cursor: pointer;
+    background-color: rgb(240, 240, 240);
+    box-shadow: -7px -7px 20px 0 rgb(255, 255, 255), 5px 5px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.user-type-buttons button.active {
+    background-color: var(--charcoal);
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.user-type-buttons button:hover {
+    color: black;
+    box-shadow: inset -7px -7px 20px 0 rgb(255, 255, 255), inset 5px 5px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Form Container */
+.container {
+    max-width: 300px;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.4s ease;
+}
+
+/* Action Buttons (Login/Sign Up) */
+.action-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: var(--pumpkin);
+    color: white;
+    font-size: medium;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-btn:hover {
+    background-color: var(--sandy-brown);
+    transform: scale(1.05);
+}
+
+/* Signup Button Style */
+.signup-btn {
+    background-color: var(--sunglow);
+    color: black;
+}
