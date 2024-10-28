@@ -5,12 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login/Signup</title>
     <link rel="stylesheet" href="style.css">
+    
+    <script>
+        // Redirect to dashboard if the user is already logged in
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                window.location.href = "dashboard.html";
+            }
+        });
+    </script>
+
 </head>
 <body>
+    <header>
+        <h1>Welcome to Our Project</h1>
+    </header>
     <div class="user-type-buttons">
         <button id="studentBtn">Student</button>
         <button id="InstructorBtn">Instructor</button>
     </div>
+
+        <!-- Navigation Links -->
+    <nav>
+        <ul>
+            <li><a href="sign_in.html">Sign In / Sign Up</a></li>
+            <!-- Dashboard link is conditional based on login status -->
+            <li><a href="dashboard.html" onclick="return checkLogin()">Dashboard</a></li>
+            <li><a href="student-class-view.html">Student Class View</a></li>
+            <li><a href="teacher-class-view.html">Instructor Class View</a></li>
+        </ul>
+    </nav>
+
+<!--
     <div class="container">
         <h2 id="formTitle">Login</h2>
 
@@ -31,7 +57,20 @@
             <button class="signup-btn" onclick="signup()">Sign Up</button>
         </div>
     </div>
+   -->
 
-    <script src="script.js"></script>
+    <footer>
+        <p>&copy; 2024 Our Project Team</p>
+    </footer>
+
+    <script src="script.js"> 
+        function checkLogin() {
+            if (localStorage.getItem('isLoggedIn') !== 'true') {
+                alert("Please log in to access the dashboard.");
+                return false; // Prevents navigation to dashboard if not logged in
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
