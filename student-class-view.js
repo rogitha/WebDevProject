@@ -1,6 +1,6 @@
 function goStudentHome(){
     //This is temporary
-    window.location.href = "index.html";
+    window.location.href = "dashboard.html";
 }
 
 let videoDropArea = document.getElementById("drop-area");
@@ -87,16 +87,16 @@ let assignments = [
 
 function displayAssignment(assignmentName){
     let assignment = assignments.find(a => a[0] === assignmentName);
-    if(assignment === null){
+    if(assignment === undefined){
         alert("Error: assignment not found");
         return;
     }
     document.getElementById("assignment-name").innerText = assignment[0];
-    document.getElementById("due-date").innerText = `Due: ${a[1]} ${a[2]}`;
+    document.getElementById("due-date").innerText = `Due: ${assignment[1]} ${assignment[2]}`;
     //Check if assignment has a grade
     document.getElementById("grade-status").innerText = assignment[3] === null ? "Not Graded" : `Grade: ${assignment[3]}`;
     document.getElementById("assignment-submission").style.display = "flex";
-    document.getElementById("placeholder-submission").style.display = "none";
+    document.getElementById("placeholder").style.display = "none";
 
 }
 
