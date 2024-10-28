@@ -20,14 +20,24 @@ function toggleForm() {
 // Login Function (Redirects to Dashboard)
 function login() {
     if (document.getElementById("formTitle").textContent === "Login") {
-        // Placeholder for authentication (redirect to dashboard on login)
+        // Simulate login success
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userType', userType); // Store 'Student' or 'Instructor'
         window.location.href = "dashboard.html";
     } else {
         alert("Please complete the sign-up process.");
     }
 }
 
+// Logout Function
+function logout() {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userType');
+    window.location.href = "index.html";
+}
+
 // Initialize User Type on Page Load
 window.addEventListener("DOMContentLoaded", () => {
     setUserType("Student");
 });
+
