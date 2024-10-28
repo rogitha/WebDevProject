@@ -1,8 +1,26 @@
+:root {
+  /* Color palette */
+  --charcoal: #233d4dff;
+  --pumpkin: #fe7f2dff;
+  --sunglow: #fcca46ff;
+  --olivine: #a1c181ff;
+  --zomp: #619b8aff;
+
+  /* Highlight palette */
+  --powder-blue: #8fb3ccff;
+  --sandy-brown: #fea971ff;
+  --naples-yellow: #fed971ff;
+  --celadon: #b6d09fff;
+  --cambridge-blue: #9bc0b6ff;
+
+  --font-main: Arial, sans-serif;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: var(--font-main);
   }
   
   body, html {
@@ -37,6 +55,7 @@
   }
   
   .user-type-buttons button {
+    font-size: medium;
     background-color: rgb(240,240,240);
     color: black;
     border: none;
@@ -54,11 +73,11 @@
                 inset  5px  5px 10px 0 rgba(0,0,0,0.2);
   }
 
-  .user-type-buttons button:active {
-    color: white;
-    background-color: red;
-    box-shadow: -7px -7px 20px 0 rgb(255,255,255),
-                 5px  5px 10px 0 rgba(0,0,0,0.2);
+  .user-type-buttons button.active {
+      background-color: var(--charcoal);
+      color: white;
+      box-shadow: -7px -7px 20px 0 rgb(255,255,255),
+                   5px  5px 10px 0 rgba(0,0,0,0.2);
   }
   
   h2 {
@@ -99,20 +118,18 @@
   }
   
   .login-btn {
-    background-color: #28a745;
+    background-color: var(--pumpkin);
     color: white;
   }
   
   .signup-btn {
-    background-color: #007bff;
-    color: white;
+    background-color: var(--sunglow);
   }
   
   .login-btn:hover {
-    background-color: #218838;
+    background-color: var(--sandy-brown);
   }
   
   .signup-btn:hover {
-    background-color: #0056b3;
+    background-color: var(--naples-yellow);
   }
-  
