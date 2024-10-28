@@ -20,9 +20,11 @@ function toggleForm() {
 // Login Function (Redirects to Dashboard)
 function login() {
     if (document.getElementById("formTitle").textContent === "Login") {
-        // Simulate login success
+        // Simulate login success by storing login status
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userType', userType); // Store 'Student' or 'Instructor'
+        
+        // Redirect to dashboard
         window.location.href = "dashboard.html";
     } else {
         alert("Please complete the sign-up process.");
@@ -40,4 +42,3 @@ function logout() {
 window.addEventListener("DOMContentLoaded", () => {
     setUserType("Student");
 });
-
