@@ -30,6 +30,10 @@ body {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 20px;
 }
 
 .user-type-buttons button {
