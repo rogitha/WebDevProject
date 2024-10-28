@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="dashboard_style.css">
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('isLoggedIn') !== 'true') {
+                // Redirect if not logged in
+                window.location.href = "index.html";
+            }
+        });
+    </script>
+    
 </head>
 <body>
     <div class="header">
@@ -15,6 +25,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="dashboard_script.js"></script>
 </body>
 </html>
