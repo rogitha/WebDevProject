@@ -1,135 +1,124 @@
+/* Root Colors and Fonts */
 :root {
-  /* Color palette */
-  --charcoal: #233d4dff;
-  --pumpkin: #fe7f2dff;
-  --sunglow: #fcca46ff;
-  --olivine: #a1c181ff;
-  --zomp: #619b8aff;
-
-  /* Highlight palette */
-  --powder-blue: #8fb3ccff;
-  --sandy-brown: #fea971ff;
-  --naples-yellow: #fed971ff;
-  --celadon: #b6d09fff;
-  --cambridge-blue: #9bc0b6ff;
-
-  --font-main: Arial, sans-serif;
+    --charcoal: #233d4d;
+    --pumpkin: #fe7f2d;
+    --sunglow: #fcca46;
+    --white: #ffffff;
+    --font-main: Arial, sans-serif;
 }
 
+/* Basic Reset */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     font-family: var(--font-main);
-  }
-  
-  body, html {
-    width: 100%;
-    height: 100%;
+}
+
+/* Body Layout */
+body {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background-color: rgb(240,240,240);
-  }
+    justify-content: center;
+    min-height: 100vh;
+    background-color: rgb(240, 240, 240);
+}
 
-  canvas {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-  
-  .container {
-    width: 300px;
-    padding: 20px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    position: relative;
-  }
-  
-  .user-type-buttons {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-  }
-  
-  .user-type-buttons button {
-    font-size: medium;
-    background-color: rgb(240,240,240);
-    color: black;
-    border: none;
-    padding: 10px 30px;
-    border-radius: 12px;
-    cursor: pointer;
-    margin-left: 15px;
-    box-shadow: -7px -7px 20px 0 rgb(255,255,255),
-                 5px  5px 10px 0 rgba(0,0,0,0.2);
-  }
-  
-  .user-type-buttons button:hover {
-    color: black;
-    box-shadow: inset -7px -7px 20px 0 rgb(255,255,255),
-                inset  5px  5px 10px 0 rgba(0,0,0,0.2);
-  }
-
-  .user-type-buttons button.active {
-      background-color: var(--charcoal);
-      color: white;
-      box-shadow: -7px -7px 20px 0 rgb(255,255,255),
-                   5px  5px 10px 0 rgba(0,0,0,0.2);
-  }
-  
-  h2 {
+/* Header */
+header {
     text-align: center;
     margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 5px;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-  }
-  
-  .form-actions {
+}
+
+header h1 {
+    font-size: 2em;
+    color: var(--charcoal);
+    margin-bottom: 10px;
+}
+
+/* Navigation */
+nav ul {
+    list-style-type: none;
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .form-actions button {
-    padding: 10px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    width: 48%;
-  }
-  
-  .login-btn {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+    gap: 15px;
+}
+
+nav ul li {
+    margin: 5px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: var(--white);
+    background-color: var(--charcoal);
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
     background-color: var(--pumpkin);
-    color: white;
-  }
-  
-  .signup-btn {
-    background-color: var(--sunglow);
-  }
-  
-  .login-btn:hover {
-    background-color: var(--sandy-brown);
-  }
-  
-  .signup-btn:hover {
-    background-color: var(--naples-yellow);
-  }
+}
+
+/* Main Content */
+main {
+    max-width: 600px;
+    text-align: center;
+    padding: 20px;
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+main h2 {
+    font-size: 1.5em;
+    color: var(--charcoal);
+    margin-bottom: 15px;
+}
+
+main p {
+    margin-bottom: 10px;
+    color: var(--charcoal);
+}
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--charcoal);
+    font-size: 0.9em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    main {
+        padding: 15px;
+        max-width: 90%;
+    }
+
+    nav ul li a {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    main h2 {
+        font-size: 1.3em;
+    }
+}
