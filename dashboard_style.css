@@ -16,6 +16,10 @@ body {
     top: 0;
 }
 
+.class-list {
+    margin: 20px;
+}
+
 .name {
     font-size: medium;
 }
