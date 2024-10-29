@@ -1,15 +1,28 @@
+/* Root Colors */
+:root {
+  --charcoal: #233d4d;
+  --pumpkin: #fe7f2d;
+  --sunglow: #fcca46;
+  --white: #ffffff;
+  --light-gray: #f0f0f0;
+  --font-main: Arial, sans-serif;
+}
+
+
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: var(--font-main);
+    color: var(--charcoal);
     border-collapse: collapse;
   }
   
   body, html {
     width: 100%;
     height: 100%;
-    background-color: white;
+    background-color: var(--light-gray);
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -17,50 +30,75 @@
   }
 
   .header{
-    background-color: #f0f2f5;
-    padding: 10px 20px;
+    background-color: white;
+    padding: 35px 20px;
     height: 60px;
-    border-bottom: 2px solid black;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
     display: flex;
     align-items: center;
     gap: 30px;
     position: sticky;
     top:0;
+    z-index: 10;
+  }
+
+  .subheader{
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    z-index: 1;
   }
 
   .button{
     border: none;
     padding: 10px 30px;
-    border-radius: 4px;
+    border-radius: 15px;
     cursor: pointer;
+    font-size: medium;
+    background-color: transparent;
+    color: var(--charcoal);
+    border: 1px solid var(--charcoal);
   }
 
-  #home-button{
-    background-color: #007bff;
-    color: white;
+  .button:hover{
+    background-color: var(--charcoal);
+    color: var(--white);
+    border: 1px solid white;
+  }
+
+  #back-button{
+    margin: 0 0 40px;
+  }
+
+  .mobile-button{
+    display: none;
+    margin: 20px 10px 10px;
   }
 
   .container{
     width: 100vw;
     display: flex;
     flex-direction: row;
-    height: calc(100% - 60px); /* Need to adjust based on header height */
+    height: calc(100% - 70px); /* Need to adjust based on header height */
   }
 
   .assignment-area{
     min-width: 150px;
-    width: 400px;
+    width: 300px;
     height: 100%;
-    border-right: 2px solid black;
   }
 
   #assignment-list{
     width: 100%;
-    height: calc(100% - 60px); /* Need to adjust based on header height */
+    height: calc(100% - 70px); /* Need to adjust based on header height */
+  }
+
+  #assignment-list button:nth-child(odd){
+    background-color: #fafafa;
   }
 
   .scrollable{
     overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .assignment{
@@ -72,6 +110,8 @@
     border-bottom: 1px solid black;
     font-size: 12pt;
     cursor: pointer;
+    text-align: left;
+    padding: 0 20px;
   }
 
   .submission{
@@ -86,8 +126,12 @@
     cursor: pointer;
   }
 
-  .assignment:hover{
-    background-color: #f0f2f55f;
+  #submission-list{
+    margin: 15px 0px;
+  }
+
+  .assignment:hover, .submission:hover, #assignment-list button:nth-child(odd):hover{
+    background-color: #e3e3e35f;
   }
 
   #placeholder{
@@ -100,7 +144,7 @@
 
   #assignment-submission{
     flex-grow: 1;
-    height: calc(100% - 60px); /* Need to adjust based on header height */
+    height: 100%; /* Need to adjust based on header height */
     padding: 40px;
     display: flex;
     flex-direction: column;
@@ -182,6 +226,7 @@
   }
 
   .rubric th {
+    color: black;
     text-align: center;
     background-color: rgba(128, 128, 128, 0.261);
   }
@@ -192,4 +237,45 @@
 
   .rubric td{
     min-width: 40px;
+    color: black;
   }
+
+  @media (max-width: 600px) {
+    .mobile-button{
+      display: block;
+    }
+
+    .container, .assignment-area, #assignment-submission, #placeholder {
+        flex-direction: column;
+        padding: 0 10px;
+        width: 100%;
+    }
+
+    .assignment-area{
+      display: none;
+    }
+
+    #assignment-submission {
+        width: 100vw; 
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+
+    .assignment-area {
+        width: 20%; 
+    }
+
+    #drop-area {
+        width: 80%; 
+    }
+
+    #video-player,
+    .rubric {
+        width: 100%;
+    }
+
+    .button {
+        width: auto; 
+    }
+}

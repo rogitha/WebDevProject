@@ -8,12 +8,13 @@
 </head>
 <body>
     <header class="header">
-        <button id="home-button" class="button" onclick="goStudentHome()">Home</button>
+        <button id="home-button" class="button" onclick="goTeacherHome()">home</button>
         <h1 id="class-name">Class Name</h1>
     </header>
-    <div class="container">
+    <div class="container"> 
         <div class="assignment-area">
-            <h3 class="header">Assignments</h3>
+            <button class="mobile-button button" onclick="showSubmissionTab()">submission</button>
+            <h3 class="subheader header">Assignments</h3>
             <div class="scrollable" id="assignment-list">
                 <!--This part will have to be dynamically generated-->
             </div>
@@ -21,14 +22,17 @@
 
         <div id="placeholder">
             <p>Please select an assignment</p>
+            <button class="mobile-button button" onclick="showAssignmentTab()">assignments</button>
         </div>
 
         <div id="assignment-submission" class="scrollable" style="display: none;">
+            <button class="mobile-button button" onclick="showAssignmentTab()">assignments</button>
             <h2 id="assignment-name"></h2>
             <h3 id="due-date"></h3>
 
             <div>
-                <h3>Submissions</h3>
+                <button id="back-button" class="button" onclick="backToSubmissions()" style="display:none">back</button>
+                <h3 id="submission-header">Submissions</h3>
                 <div class="scrollable" id="submission-list">
                     <!--This part will have to be dynamically generated-->
                 </div>

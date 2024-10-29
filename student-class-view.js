@@ -111,4 +111,14 @@ function displayAllAssignments(){
     }
 }
 
+function showAssignmentTab(){
+    document.getElementsByClassName("assignment-area")[0].style.display = 'block';
+    document.getElementById("assignment-submission").style.display = 'none';
+}
+
+function showSubmissionTab(){
+    document.getElementsByClassName("assignment-area")[0].style.display = 'none';
+    document.getElementById("assignment-submission").style.display = 'block';
+}
+
 displayAllAssignments();

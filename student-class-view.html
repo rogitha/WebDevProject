@@ -8,12 +8,13 @@
 </head>
 <body>
     <header class="header">
-        <button id="home-button" class="button" onclick="goStudentHome()">Home</button>
+        <button id="home-button" class="button" onclick="goStudentHome()">home</button>
         <h1 id="class-name">Class Name</h1>
     </header>
     <div class="container">
         <div class="assignment-area">
-            <h3 class="header">Assignments</h3>
+            <button class="mobile-button button" onclick="showSubmissionTab()">submission</button>
+            <h3 class="subheader header">Assignments</h3>
             <div class="scrollable" id="assignment-list">
                 <!--This part will have to be dynamically generated-->
             </div>
@@ -21,9 +22,11 @@
 
         <div id="placeholder">
             <p>Please select an assignment</p>
+            <button class="mobile-button button" onclick="showAssignmentTab()">assignments</button>
         </div>
 
         <div id="assignment-submission" class="scrollable" style="display: none;">
+            <button class="mobile-button button" onclick="showAssignmentTab()">assignments</button>
             <h2 id="assignment-name"></h2>
             <h3 id="due-date"></h3>
             <div id="drop-area">
@@ -56,7 +59,7 @@
                             <td>4 pts</td>
                         </tr>
                         <tr>
-                            <td>Criteria 1</td>
+                            <td>Criteria 2</td>
                             <td>4 pts</td>
                             <td>3 pts</td>
                             <td>2 pts</td>
@@ -64,7 +67,7 @@
                             <td>4 pts</td>
                         </tr>
                         <tr>
-                            <td>Criteria 1</td>
+                            <td>Criteria 3</td>
                             <td>4 pts</td>
                             <td>3 pts</td>
                             <td>2 pts</td>
