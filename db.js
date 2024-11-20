@@ -5,6 +5,64 @@ const supabaseUrl = "https://cscedmlehzsfhwojcahv.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzY2VkbWxlaHpzZmh3b2pjYWh2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIxMjM1NTEsImV4cCI6MjA0NzY5OTU1MX0.LrjN_vWgXBd-44eLcxjm1RMizAR55QMhATHCAqIjSU8";//Replit code: process.env['SUPABASE_PUBLIC_KEY'];
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+// !AUTHENTICATION! //
+// Sign-Up
+async function signUp(email, password, userType) {
+    const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+    });
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    // Add user role to the database
+    const { error: roleError } = await supabase.from("users").insert([
+        {
+            id: data.user.id,
+            email: email,
+            role: userType.toLowerCase(), // Store 'student' or 'instructor'
+        },
+    ]);
+
+    if (roleError) {
+        throw new Error(roleError.message);
+    }
+
+    return data;
+}
+
+// Login
+async function login(email, password) {
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+    });
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    return data;
+}
+
+// Get User Info
+async function getUser() {
+    const { data } = await supabase.auth.getUser();
+    return data?.user;
+}
+
+// Logout Function
+async function logout() {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+        throw new Error(error.message);
+    }
+}  
+
+
+// !DATABASE FUNCTIONS! //
 //RIGHT NOW, username will have to represent the first name
 async function getStudentInfo(username) {
     const { data, error } = await supabase.from("Student")
@@ -22,7 +80,7 @@ async function getStudentInfo(username) {
 //Uses student s_id to get classes the student is registered in
 async function getStudentClasses(s_id) {
     const { data, error } = await supabase.from("StudentTakes")
-                                            //This should act like a joing
+                                            //This should act like a join
                                            .select(`c_code, Class(c_name)`)
                                            .eq("s_id", s_id);
 
@@ -67,7 +125,6 @@ async function getSubmission(s_id, a_id){
                                                 .eq("s_id", s_id)
                                                 .eq("a_id", a_id);
 
-
     if (error) {
         console.error("Error fetching submission:", error);
     } else {
@@ -90,6 +147,20 @@ async function getTeacherInfo(username) {
     }
 }
 
+async function getTeacherClasses(t_id){
+    const { data, error } = await supabase.from("Classes")
+                                            //This should act like a join
+                                           .select(`*`)
+                                           .eq("t_id", t_id);
+
+    if (error) {
+        console.error("Error fetching classes for teacher:", error);
+    } else {
+        console.log("Teacher classes fetched:", data);
+        return data;
+    }
+}
+
 
 //TESTING CODE
 const s_id = (await getStudentInfo("John")).s_id;
@@ -109,6 +180,14 @@ const submission  = await getSubmission(s_id, a_id);
 
 console.log(submissions[0].video + " " + submission.video);
 
+const t_id = (await getTeacherInfo("Jane")).t_id;
+
+console.log(t_id);
+
+c_code = (await getTeacherClasses(t_id))[0].c_code;
+
+console.log(c_code);
+
 
 
 
@@ -119,5 +198,5 @@ export default {
     getSubmission,
     getAllSubmissions,
     getTeacherInfo,
-    // getTeacherSubmissions
+    getTeacherClasses
 };

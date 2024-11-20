@@ -252,11 +252,11 @@
     }
 
     .assignment-area{
-      display: none;
+      display: 100vw;
     }
 
     #assignment-submission {
-        width: 100vw; 
+      width: none; 
     }
 }
 

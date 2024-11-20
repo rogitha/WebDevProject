@@ -17,28 +17,41 @@ function toggleForm() {
     document.querySelector(".signup-btn").textContent = isLogin ? "Switch to Login" : "Switch to Sign Up";
 }
 
-// Login Function (Redirects to Dashboard)
-function login() {
-    if (document.getElementById("formTitle").textContent === "Login") {
-        // Simulate login success by storing login status
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userType', userType); // Store 'Student' or 'Instructor'
-        
-        // Redirect to dashboard
-        window.location.href = "dashboard.html";
-    } else {
-        alert("Please complete the sign-up process.");
-    }
-}
+// Handle Form Submission
+async function handleFormSubmit() {
+    const isLogin = document.getElementById("formTitle").textContent === "Login";
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
-// Logout Function
-function logout() {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('userType');
-    window.location.href = "index.html";
+    if (!email || !password) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    try {
+        if (isLogin) {
+            // Login Logic
+            const data = await login(email, password);
+            alert("Login successful!");
+            window.location.href = "dashboard.html";
+        } else {
+            // Sign-Up Logic
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+            const data = await signUp(email, password, userType);
+            alert("Sign-up successful! You are now logged in.");
+            window.location.href = "dashboard.html";
+        }
+    } catch (error) {
+        alert(`Error: ${error.message}`);
+    }
 }
 
 // Initialize User Type on Page Load
 window.addEventListener("DOMContentLoaded", () => {
     setUserType("Student");
 });
+

@@ -58,32 +58,47 @@ function removeVideo(){
 }
 
 
-//Assuming these are coming from a database
-let assignments = [
-    ["A01", "11/30", "11:59pm", null],
-    ["A02", "11/30", "11:59pm", null],
-    ["A03", "11/30", "11:59pm", null],
-    ["A04", "11/30", "11:59pm", null],
-    ["A05", "11/30", "11:59pm", null],
-    ["A06", "11/30", "11:59pm", null],
-    ["A07", "11/30", "11:59pm", null],
-    ["A08", "11/30", "11:59pm", null],
-    ["A09", "11/30", "11:59pm", null],
-    ["A10", "11/30", "11:59pm", null],
-    ["A11", "11/30", "11:59pm", "A"],
-    ["A12", "11/30", "11:59pm", null],
-    ["A13", "11/30", "11:59pm", null],
-    ["A14", "11/30", "11:59pm", null],
-    ["A15", "11/30", "11:59pm", null],
-    ["A16", "11/30", "11:59pm", null],
-    ["A17", "11/30", "11:59pm", null],
-    ["A18", "11/30", "11:59pm", null],
-    ["A19", "11/30", "11:59pm", null],
-    ["A20", "11/30", "11:59pm", null],
-    ["A21", "11/30", "11:59pm", null],
-    ["A22", "11/30", "11:59pm", null],
-    ["A26", "11/30", "11:59pm", null]
-];
+let assignments;
+try{
+    //This will not be needed once we cache student info after sign in
+    const s_id = fetch(`/student/info/John`);
+
+    // Grabbing dummy data from the database
+    let getAssignments = await fetch(`/student/assignments/${s_id}`, {
+        method: `GET`
+    });
+    assignments = await getAssignments.json();
+
+} catch (error) {
+    alert(`Failed to get assignments: ` + error);
+}
+
+
+// [
+//     ["A01", "11/30", "11:59pm", null],
+//     ["A02", "11/30", "11:59pm", null],
+//     ["A03", "11/30", "11:59pm", null],
+//     ["A04", "11/30", "11:59pm", null],
+//     ["A05", "11/30", "11:59pm", null],
+//     ["A06", "11/30", "11:59pm", null],
+//     ["A07", "11/30", "11:59pm", null],
+//     ["A08", "11/30", "11:59pm", null],
+//     ["A09", "11/30", "11:59pm", null],
+//     ["A10", "11/30", "11:59pm", null],
+//     ["A11", "11/30", "11:59pm", "A"],
+//     ["A12", "11/30", "11:59pm", null],
+//     ["A13", "11/30", "11:59pm", null],
+//     ["A14", "11/30", "11:59pm", null],
+//     ["A15", "11/30", "11:59pm", null],
+//     ["A16", "11/30", "11:59pm", null],
+//     ["A17", "11/30", "11:59pm", null],
+//     ["A18", "11/30", "11:59pm", null],
+//     ["A19", "11/30", "11:59pm", null],
+//     ["A20", "11/30", "11:59pm", null],
+//     ["A21", "11/30", "11:59pm", null],
+//     ["A22", "11/30", "11:59pm", null],
+//     ["A26", "11/30", "11:59pm", null]
+// ];
 
 function displayAssignment(assignmentName){
     let assignment = assignments.find(a => a[0] === assignmentName);
@@ -102,9 +117,9 @@ function displayAssignment(assignmentName){
 
 function displayAllAssignments(){
     let assignmentList = document.getElementById("assignment-list");
-    for(a of assignments){
+    for(let a of assignments){
         assignmentList.innerHTML += `
-        <button class="assignment" onclick="displayAssignment('${a[0]}')">
+        <button class="assignment" onclick="displayAssignment('${a.a_name}')">
             ${a[0]}
         </button>
         `;
