@@ -17,11 +17,6 @@ function toggleForm() {
     document.querySelector(".signup-btn").textContent = isLogin ? "Switch to Login" : "Switch to Sign Up";
 }
 
-document.getElementById("authForm").addEventListener("submit", (e) => {
-    e.preventDefault(); // Prevent form from refreshing the page
-    handleFormSubmit();
-});
-
 // Handle Form Submission
 async function handleFormSubmit() {
     const isLogin = document.getElementById("formTitle").textContent === "Login";
