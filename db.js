@@ -18,16 +18,16 @@ async function signUp(email, password, userType) {
     }
 
     // Add user role to the database
-    const { error: roleError } = await supabase.from("users").insert([
+    const { error: tableError } = await supabase.from(userType).insert([
         {
-            id: data.user.id,
-            email: email,
-            role: userType.toLowerCase(), // Store 'student' or 'instructor'
+            s_id: data.user.id,
+            f_name: "Jon", // For now
+            l_name: "Jones"
         },
     ]);
 
-    if (roleError) {
-        throw new Error(roleError.message);
+    if (tableError) {
+        throw new Error(tableError.message);
     }
 
     return data;
@@ -192,7 +192,7 @@ async function getTeacherClasses(t_id){
 
 
 export default {
-    singUp,
+    signUp,
     login,
     getStudentInfo,
     getStudentClasses,

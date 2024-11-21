@@ -15,7 +15,7 @@ app.get("/", (req, res) => res.redirect("/index.html"));
 
 // AUTHENTICATION ENDPOINTS //
 // Sign-Up Endpoint
-app.post("/signup", async (req, res) => {
+app.post("/signup", async (req, res) => { 
     const { email, password, role } = req.body;
 
     if (!email || !password || !role) {

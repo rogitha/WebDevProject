@@ -38,7 +38,7 @@ async function handleFormSubmit() {
             // Login Logic
             const data = await login(email, password);
             alert("Login successful!");
-            window.location.href = "dashboard.html";
+           
         } else {
             // Sign-Up Logic
             const confirmPassword = document.getElementById("confirmPassword").value;
@@ -48,8 +48,8 @@ async function handleFormSubmit() {
             }
             const data = await signUp(email, password, userType);
             alert("Sign-up successful! You are now logged in.");
-            window.location.href = "dashboard.html";
         }
+        window.location.href = "/dashboard.html";
     } catch (error) {
         alert(`Error: ${error.message}`);
     }
@@ -93,7 +93,6 @@ async function login(email, password) {
         const data = await response.json();
 
         if (!response.ok) {
-            alert("fuck");
             throw new Error(data.error || "Invalid email or password.");
         }
 
