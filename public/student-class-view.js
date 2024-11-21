@@ -61,7 +61,7 @@ function removeVideo(){
 let assignments;
 try{
     //This will not be needed once we cache student info after sign in
-    const s_id = fetch(`/student/info/John`);
+    const s_id = (await fetch(`/student/info/John`)).s_id;
 
     // Grabbing dummy data from the database
     let getAssignments = await fetch(`/student/assignments/${s_id}`, {
@@ -100,16 +100,38 @@ try{
 //     ["A26", "11/30", "11:59pm", null]
 // ];
 
-function displayAssignment(assignmentName){
-    let assignment = assignments.find(a => a[0] === assignmentName);
+async function displayAssignment(assignmentName){
+    let assignment = assignments.find(a => a.a_name === assignmentName);
     if(assignment === undefined){
         alert("Error: assignment not found");
         return;
     }
-    document.getElementById("assignment-name").innerText = assignment[0];
-    document.getElementById("due-date").innerText = `Due: ${assignment[1]} ${assignment[2]}`;
-    //Check if assignment has a grade
-    document.getElementById("grade-status").innerText = assignment[3] === null ? "Not Graded" : `Grade: ${assignment[3]}`;
+    document.getElementById("assignment-name").innerText = assignment.a_name;
+    document.getElementById("due-date").innerText = `Due: ${assignment.due_date}`;
+    
+    //Check if assignment has a submission
+    let submission;
+    try{
+        //This will not be needed once we cache student info after sign in
+        const s_id = (await fetch(`/student/info/John`)).s_id;
+
+        // Grabbing dummy data from the database
+        let response = await fetch(`/student/submission/${s_id}/${assignment.a_id}`, {
+            method: `GET`
+        });
+        submission = await response.json();
+
+    } catch (error) {
+        alert(`Failed to get assignments: ` + error);
+    }
+
+    //Will need to fill in more submission details once we get video transfer working
+    if(submission){
+        document.getElementById("grade-status").innerText = submission.grade === -1 ? "Not Graded" : submission.grade;
+    } else {
+        document.getElementById("grade-status").innerText = "No submission";
+    }
+    
     document.getElementById("assignment-submission").style.display = "flex";
     document.getElementById("placeholder").style.display = "none";
 
@@ -120,7 +142,7 @@ function displayAllAssignments(){
     for(let a of assignments){
         assignmentList.innerHTML += `
         <button class="assignment" onclick="displayAssignment('${a.a_name}')">
-            ${a[0]}
+            ${a.a_name}
         </button>
         `;
     }

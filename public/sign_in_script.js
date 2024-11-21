@@ -50,6 +50,29 @@ async function handleFormSubmit() {
     }
 }
 
+// try {
+//     const token = window.localStorage.getItem('token');
+//     const response = await fetch(`${webAPI}/api/countries`, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'X-auth': token
+//         },
+
+//         body: JSON.stringify({country: country.value, rank: rank.value, happiness: happiness.value })
+//     });
+//     if (response.ok) {
+//         alert('Country added');
+        
+//     } else {
+//         // Handle the error (you can also show a message to the user)
+//         alert(`Failed to add country: ${response.body.error}`);
+//     }
+// } catch (error) {
+//         console.log(`Request failed - ${error}`);
+//         alert(`Something has gone terribly wrong: ${error}`);
+//     }
+
 // Initialize User Type on Page Load
 window.addEventListener("DOMContentLoaded", () => {
     setUserType("Student");

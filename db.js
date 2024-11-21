@@ -163,35 +163,37 @@ async function getTeacherClasses(t_id){
 
 
 //TESTING CODE
-const s_id = (await getStudentInfo("John")).s_id;
+// const s_id = (await getStudentInfo("John")).s_id;
 
-console.log(s_id);
+// console.log(s_id);
 
-const c_code = (await getStudentClasses(s_id))[0].c_code;
+// const c_code = (await getStudentClasses(s_id))[0].c_code;
 
-console.log(c_code);
+// console.log(c_code);
 
-const a_id = (await getAllClassAssignments(c_code))[0].a_id;
+// const a_id = (await getAllClassAssignments(c_code))[0].a_id;
 
-console.log(a_id);
+// console.log(a_id);
 
-const submissions = await getAllSubmissions(a_id);
-const submission  = await getSubmission(s_id, a_id);
+// const submissions = await getAllSubmissions(a_id);
+// const submission  = await getSubmission(s_id, a_id);
 
-console.log(submissions[0].video + " " + submission.video);
+// console.log(submissions[0].video + " " + submission.video);
 
-const t_id = (await getTeacherInfo("Jane")).t_id;
+// const t_id = (await getTeacherInfo("Jane")).t_id;
 
-console.log(t_id);
+// console.log(t_id);
 
-c_code = (await getTeacherClasses(t_id))[0].c_code;
+// c_code = (await getTeacherClasses(t_id))[0].c_code;
 
-console.log(c_code);
+// console.log(c_code);
 
 
 
 
 export default {
+    singUp,
+    login,
     getStudentInfo,
     getStudentClasses,
     getAllClassAssignments,
