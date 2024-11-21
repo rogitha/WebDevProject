@@ -17,6 +17,11 @@ function toggleForm() {
     document.querySelector(".signup-btn").textContent = isLogin ? "Switch to Login" : "Switch to Sign Up";
 }
 
+document.getElementById("authForm").addEventListener("submit", (e) => {
+    e.preventDefault(); // Prevent form from refreshing the page
+    handleFormSubmit();
+});
+
 // Handle Form Submission
 async function handleFormSubmit() {
     const isLogin = document.getElementById("formTitle").textContent === "Login";
@@ -50,28 +55,54 @@ async function handleFormSubmit() {
     }
 }
 
-// try {
-//     const token = window.localStorage.getItem('token');
-//     const response = await fetch(`${webAPI}/api/countries`, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'X-auth': token
-//         },
+// Sign-Up Function
+async function signUp(email, password, role) {
+    try {
+        const response = await fetch("/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password, role }),
+        });
 
-//         body: JSON.stringify({country: country.value, rank: rank.value, happiness: happiness.value })
-//     });
-//     if (response.ok) {
-//         alert('Country added');
-        
-//     } else {
-//         // Handle the error (you can also show a message to the user)
-//         alert(`Failed to add country: ${response.body.error}`);
-//     }
-// } catch (error) {
-//         console.log(`Request failed - ${error}`);
-//         alert(`Something has gone terribly wrong: ${error}`);
-//     }
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Failed to sign up.");
+        }
+
+        return data; // Return the user data on success
+    } catch (error) {
+        console.error("Sign-up error:", error.message);
+        throw error; // Re-throw for the caller to handle
+    }
+}
+
+// Login Function
+async function login(email, password) {
+    try {
+        const response = await fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert("fuck");
+            throw new Error(data.error || "Invalid email or password.");
+        }
+
+        return data; // Return the user data on success
+    } catch (error) {
+        console.error("Login error:", error.message);
+        throw error; // Re-throw for the caller to handle
+    }
+}
 
 // Initialize User Type on Page Load
 window.addEventListener("DOMContentLoaded", () => {

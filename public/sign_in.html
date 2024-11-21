@@ -15,28 +15,30 @@
 
     <!-- Sign In / Sign Up Form Container -->
     <div class="container">
-        <h2 id="formTitle">Login</h2>
+        <form id="authForm">
+            <h2 id="formTitle">Login</h2>
 
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" required>
-        </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
 
-        <!-- Conditional Sign-Up Field -->
-        <div class="form-group" id="confirmPasswordGroup" style="display: none;">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" required>
-        </div>
+            <!-- Conditional Sign-Up Field -->
+            <div class="form-group" id="confirmPasswordGroup" style="display: none;">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" required>
+            </div>
 
-        <!-- Form Action Buttons -->
-        <div class="form-actions">
-            <button class="action-btn" onclick="login()">Login</button>
-            <button class="action-btn signup-btn" onclick="toggleForm()">Switch to Sign Up</button>
-        </div>
+            <!-- Form Action Buttons -->
+            <div class="form-actions">
+                <button class="action-btn" type="submit">Login</button>
+                <button class="action-btn signup-btn" onclick="toggleForm()">Switch to Sign Up</button>
+            </div>
+        </form>
     </div>
 
     <script src="sign_in_script.js"></script>
