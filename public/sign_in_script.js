@@ -1,6 +1,11 @@
 // Track the user type (Student or Instructor)
 let userType = "Student";
 
+// Initialize User Type on Page Load
+window.addEventListener("DOMContentLoaded", () => {
+    setUserType("Student");
+});
+
 // Set User Type (Student or Instructor) and Activate the Button
 function setUserType(type) {
     userType = type;
@@ -11,42 +16,50 @@ function setUserType(type) {
 // Toggle between Login and Sign Up Forms
 function toggleForm() {
     const isLogin = document.getElementById("formTitle").textContent === "Login";
-    document.getElementById("formTitle").textContent = isLogin ? "Sign Up" : "Login";
-    document.getElementById("confirmPasswordGroup").style.display = isLogin ? "block" : "none";
-    document.querySelector(".action-btn").textContent = isLogin ? "Sign Up" : "Login";
-    document.querySelector(".signup-btn").textContent = isLogin ? "Switch to Login" : "Switch to Sign Up";
+    document.getElementById("formTitle").textContent = isLogin ? "Sign up" : "Login";
+    document.getElementById("confirmPassword").style.display = isLogin ? "block" : "none";
+    document.getElementById("login-btn").textContent = isLogin ? "Sign up" : "Login";
+    document.getElementById("switch-btn").textContent = isLogin ? "Switch to login" : "Switch to sign up";
 }
 
 // Handle Form Submission
 async function handleFormSubmit() {
     const isLogin = document.getElementById("formTitle").textContent === "Login";
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    if (!email || !password) {
-        alert("Please fill in all fields.");
-        return;
-    }
+    // Clear previous error messages
+    errorContainer.textContent = '';
+    errorContainer.classList.remove('shake');
 
     try {
         if (isLogin) {
+            if (!email || !password) {
+                throw new Error("Fill in all fields");
+            }
+
             // Login Logic
             const data = await login(email, password);
             alert("Login successful!");
-           
         } else {
-            // Sign-Up Logic
-            const confirmPassword = document.getElementById("confirmPassword").value;
-            if (password !== confirmPassword) {
-                alert("Passwords do not match.");
-                return;
+            const confirmPassword = document.getElementById("confirmPassword").value.trim();
+
+            if (!email || !password || !confirmPassword) {
+                throw new Error("Fill in all fields");
             }
+
+            if (password !== confirmPassword) {
+                throw new Error("Passwords do not match");
+            }
+
+            // Sign-Up Logic
             const data = await signUp(email, password, userType);
             alert("Sign-up successful! You are now logged in.");
         }
         window.location.href = "/dashboard.html";
-    } catch (error) {
-        alert(`Error: ${error.message}`);
+    } catch (error) { // Catch input errors
+        errorContainer.textContent = error.message;
+        errorContainer.classList.add('shake');
     }
 }
 
@@ -70,7 +83,6 @@ async function signUp(email, password, role) {
         return data; // Return the user data on success
     } catch (error) {
         console.error("Sign-up error:", error.message);
-        throw error; // Re-throw for the caller to handle
     }
 }
 
@@ -94,12 +106,6 @@ async function login(email, password) {
         return data; // Return the user data on success
     } catch (error) {
         console.error("Login error:", error.message);
-        throw error; // Re-throw for the caller to handle
     }
 }
-
-// Initialize User Type on Page Load
-window.addEventListener("DOMContentLoaded", () => {
-    setUserType("Student");
-});
 

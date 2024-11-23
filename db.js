@@ -1,6 +1,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 
+// TODO: Add secrets
 const supabaseUrl = "https://cscedmlehzsfhwojcahv.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzY2VkbWxlaHpzZmh3b2pjYWh2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIxMjM1NTEsImV4cCI6MjA0NzY5OTU1MX0.LrjN_vWgXBd-44eLcxjm1RMizAR55QMhATHCAqIjSU8";//Replit code: process.env['SUPABASE_PUBLIC_KEY'];
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -8,26 +9,27 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // !AUTHENTICATION! //
 // Sign-Up
 async function signUp(email, password, userType) {
-    const { data, error } = await supabase.auth.signUp({
+    const { data, error: signUpError } = await supabase.auth.signUp({
         email: email,
         password: password,
     });
 
-    if (error) {
-        throw new Error(error.message);
+    if (signUpError) {
+        throw new Error(signUpError.message);
     }
 
-    // Add user role to the database
+    // Add user to either Student or Instructor table 
+    // based on user type when they signed up
     const { error: tableError } = await supabase.from(userType).insert([
         {
             s_id: data.user.id,
-            f_name: "Jon", // For now
+            f_name: "Jon", // TODO: Add name
             l_name: "Jones"
         },
     ]);
 
     if (tableError) {
-        throw new Error(tableError.message);
+        throw new Error(`Error inserting into ${userType} table`);
     }
 
     return data;

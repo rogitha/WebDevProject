@@ -1,10 +1,19 @@
 /* Root Colors and Fonts */
 :root {
     --charcoal: #233d4d;
+    --charcoalL: #2f5063; /* 20% lighter */
+    --charcoalG: rgba(35, 61, 77, 0.85); /* Subtle glow effect */
+
     --pumpkin: #fe7f2d;
+    --pumpkinL: #ff9960; /* 20% lighter */
+    --pumpkinG: #ff7930; /* Vibrant orange for glow */
+
     --sunglow: #fcca46;
+    --sunglowL: #ffe278; /* 20% lighter */
+    --sunglowG: #ffd85a; /* Golden pop for glow */
+
     --white: #ffffff;
-    --light-gray: #f0f0f0;
+    --light-gray: rgb(240,240,240);
     --font-main: Arial, sans-serif;
 }
 
@@ -14,6 +23,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: var(--font-main);
+    border-radius: 20px;
 }
 
 /* Body Layout */
@@ -42,7 +52,7 @@ header {
 }
 
 header h1 {
-    font-size: 1.8em;
+    font-size: big;
     color: var(--charcoal);
     margin-bottom: 15px;
 }
@@ -51,14 +61,13 @@ header h1 {
 main {
     width: 100%;
     background-color: var(--white);
-    border-radius: 12px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-    padding: 20px;
+    padding: 40px;
     margin-bottom: 20px;
 }
 
 .intro-text, .instruction-text {
-    font-size: 1em;
+    font-size: medium;
     color: var(--charcoal);
     margin-bottom: 15px;
     line-height: 1.6;
@@ -67,23 +76,21 @@ main {
 /* CTA Button */
 .cta-button {
     display: inline-block;
-    padding: 12px 24px;
-    font-size: 1.1em;
+    padding: 15px 30px;
+    font-size: medium;
     font-weight: bold;
     color: var(--white);
     background-color: var(--pumpkin);
-    border-radius: 8px;
     text-decoration: none;
-    transition: background-color 0.3s ease;
 }
 
 .cta-button:hover {
-    background-color: var(--sunglow);
+    background-color: var(--pumpkinL);
 }
 
 /* Footer */
 footer {
     text-align: center;
     color: var(--charcoal);
-    font-size: 0.9em;
+    font-size: small;
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="sign_in_style.css">
 </head>
 <body>
@@ -17,27 +18,12 @@
     <div class="container">
         <form id="authForm">
             <h2 id="formTitle">Login</h2>
-
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" required>
-            </div>
-
-            <!-- Conditional Sign-Up Field -->
-            <div class="form-group" id="confirmPasswordGroup" style="display: none;">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" required>
-            </div>
-
-            <!-- Form Action Buttons -->
-            <div class="form-actions">
-                <button class="action-btn" type="submit" onclick="handleFormSubmit()">Login</button>
-                <button class="action-btn signup-btn" type="reset" onclick="toggleForm()">Switch to Sign Up</button>
-            </div>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input style="display: none;" type="password" id="confirmPassword" placeholder="Confirm password" required>
+            <div id="errorContainer"></div>
+            <button id="login-btn" type="submit" onclick="handleFormSubmit()">Login</button>
+            <button id="switch-btn" onclick="toggleForm()">Switch to sign up</button>
         </form>
     </div>
 
