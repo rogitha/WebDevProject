@@ -23,13 +23,16 @@ function toggleForm() {
 }
 
 // Handle Form Submission
-async function handleFormSubmit() {
+async function handleFormSubmit(event) {
+    event.preventDefault(); // Prevent form from submitting
+
     const isLogin = document.getElementById("formTitle").textContent === "Login";
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
 
     // Clear previous error messages
     errorContainer.textContent = '';
+    void errorContainer.offsetWidth; // Trigger reflow to reset animation
     errorContainer.classList.remove('shake');
 
     try {
