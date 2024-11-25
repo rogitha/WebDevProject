@@ -23,40 +23,29 @@ function toggleForm() {
 }
 
 // Handle Form Submission
-async function handleFormSubmit(event) {
-    event.preventDefault(); // Prevent form from submitting
-
+async function handleFormSubmit() {
     const isLogin = document.getElementById("formTitle").textContent === "Login";
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
 
     // Clear previous error messages
     errorContainer.textContent = '';
-    void errorContainer.offsetWidth; // Trigger reflow to reset animation
     errorContainer.classList.remove('shake');
 
     try {
         if (isLogin) {
-            if (!email || !password) {
-                throw new Error("Fill in all fields");
-            }
-
             // Login Logic
-            const data = await login(email, password);
+            // const data = await login(email, password);
             alert("Login successful!");
         } else {
             const confirmPassword = document.getElementById("confirmPassword").value.trim();
-
-            if (!email || !password || !confirmPassword) {
-                throw new Error("Fill in all fields");
-            }
 
             if (password !== confirmPassword) {
                 throw new Error("Passwords do not match");
             }
 
             // Sign-Up Logic
-            const data = await signUp(email, password, userType);
+            // const data = await signUp(email, password, userType);
             alert("Sign-up successful! You are now logged in.");
         }
         window.location.href = "/dashboard.html";
