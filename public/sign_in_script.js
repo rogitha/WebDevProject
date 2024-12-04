@@ -18,16 +18,18 @@ function toggleForm() {
     const isLogin = document.getElementById("formTitle").textContent === "Login";
     document.getElementById("formTitle").textContent = isLogin ? "Sign up" : "Login";
     document.getElementById("confirmPassword").style.display = isLogin ? "block" : "none";
+    document.getElementById("name").style.display = isLogin ? "block" : "none";
     document.getElementById("login-btn").textContent = isLogin ? "Sign up" : "Login";
     document.getElementById("switch-btn").textContent = isLogin ? "Switch to login" : "Switch to sign up";
 }
 
 // Handle Form Submission
 async function handleFormSubmit(event) {
-    event.preventDefault(); // Prevent form from submitting
+    //event.preventDefault(); // Prevent form from submitting
 
     const isLogin = document.getElementById("formTitle").textContent === "Login";
     const email = document.getElementById("email").value.trim();
+    const name = document.getElementById("name").value.trim();
     const password = document.getElementById("password").value.trim();
 
     // Clear previous error messages
@@ -44,10 +46,11 @@ async function handleFormSubmit(event) {
             // Login Logic
             const data = await login(email, password);
             alert("Login successful!");
+
         } else {
             const confirmPassword = document.getElementById("confirmPassword").value.trim();
 
-            if (!email || !password || !confirmPassword) {
+            if (!email || !password || !confirmPassword || !name) {
                 throw new Error("Fill in all fields");
             }
 
@@ -56,7 +59,7 @@ async function handleFormSubmit(event) {
             }
 
             // Sign-Up Logic
-            const data = await signUp(email, password, userType);
+            const data = await signUp(email, password, userType, name);
             alert("Sign-up successful! You are now logged in.");
         }
         window.location.href = "/dashboard.html";
@@ -67,14 +70,14 @@ async function handleFormSubmit(event) {
 }
 
 // Sign-Up Function
-async function signUp(email, password, role) {
+async function signUp(email, password, role, name) {
     try {
         const response = await fetch("/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email, password, role }),
+            body: JSON.stringify({ email, password, role, name }),
         });
 
         const data = await response.json();
@@ -102,6 +105,8 @@ async function login(email, password) {
 
         const data = await response.json();
 
+        console.log(data);
+
         if (!response.ok) {
             throw new Error(data.error || "Invalid email or password.");
         }
@@ -109,6 +114,7 @@ async function login(email, password) {
         return data; // Return the user data on success
     } catch (error) {
         console.error("Login error:", error.message);
+        throw error; 
     }
 }
 

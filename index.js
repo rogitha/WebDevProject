@@ -16,15 +16,15 @@ app.get("/", (req, res) => res.redirect("/index.html"));
 // AUTHENTICATION ENDPOINTS //
 // Sign-Up Endpoint
 app.post("/signup", async (req, res) => { 
-    const { email, password, role } = req.body;
+    const { email, password, role, name } = req.body;
 
-    if (!email || !password || !role) {
-        return res.status(400).json({ error: "Email, password, and role are required." });
+    if (!email || !password || !role || !name) {
+        return res.status(400).json({ error: "Email, password, role, and name are required." });
     }
 
     try {
         // Call the DB method to handle signup logic
-        const user = await db.signUp(email, password, role);
+        const user = await db.signUp(email, password, role, name);
 
         res.status(201).json({ message: "User signed up successfully", user });
     } catch (error) {

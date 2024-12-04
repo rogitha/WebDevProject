@@ -8,7 +8,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 // !AUTHENTICATION! //
 // Sign-Up
-async function signUp(email, password, userType) {
+async function signUp(email, password, userType, name) {
     const { data, error: signUpError } = await supabase.auth.signUp({
         email: email,
         password: password,
@@ -23,8 +23,7 @@ async function signUp(email, password, userType) {
     const { error: tableError } = await supabase.from(userType).insert([
         {
             s_id: data.user.id,
-            f_name: "Jon", // TODO: Add name
-            l_name: "Jones"
+            name: name
         },
     ]);
 
