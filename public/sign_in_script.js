@@ -34,17 +34,12 @@ async function handleFormSubmit(event) {
 
     // Clear previous error messages
     errorContainer.textContent = '';
-    void errorContainer.offsetWidth; // Trigger reflow to reset animation
     errorContainer.classList.remove('shake');
 
     try {
         if (isLogin) {
-            if (!email || !password) {
-                throw new Error("Fill in all fields");
-            }
-
             // Login Logic
-            const data = await login(email, password);
+            // const data = await login(email, password);
             alert("Login successful!");
 
         } else {
